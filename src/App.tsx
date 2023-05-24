@@ -33,8 +33,8 @@ const App: React.FC = () => {
         return;
       }
       let add
-      let active = allTodos
-      let complete = completedTodos
+      const active = allTodos
+      const complete = completedTodos
 
       if (source.droppableId === 'TodosList') {
         add = active[source.index]
@@ -54,10 +54,17 @@ const App: React.FC = () => {
     }
 
     useEffect(() => {
-       const savedItems = JSON.parse(localStorage.getItem('todolist'))
+       // @ts-ignore
+        const savedItems = JSON.parse(localStorage.getItem('todolist'))
 
-        setAllTodos(savedItems)
-    }, [])
+        if (savedItems) {
+            setAllTodos(savedItems)
+            }
+
+        }, [])
+
+
+
 
     useEffect(() => {
         localStorage.setItem('todolist', JSON.stringify(allTodos))
